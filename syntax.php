@@ -8,13 +8,13 @@ class syntax_plugin_nssize extends DokuWiki_Syntax_Plugin {
   function connectTo($mode) { $this->Lexer->addSpecialPattern('\{\{nssize>[^}]*\}\}',$mode,'plugin_nssize'); }
 
     // Handling lexer
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
         $match = substr($match,8,-2);
         if($match[0]=='>') $match = substr($match,1);
         return array($state,$match);
     }
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         global $conf;
         if($mode!='xhtml') return false;
         $paths = array('datadir'   => 'pages',
